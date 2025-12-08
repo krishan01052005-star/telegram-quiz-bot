@@ -1,11 +1,9 @@
 from telegram.ext import ApplicationBuilder
 import os
 
-TOKEN = os.getenv("Token")
+TOKEN = os.getenv("TOKEN")
 
 application = ApplicationBuilder().token(TOKEN).build()
-
-# TODO: your handlers here...
 
 if __name__ == "__main__":
     PORT = int(os.environ.get("PORT", 8443))
@@ -15,4 +13,3 @@ if __name__ == "__main__":
         url_path=TOKEN,
         webhook_url=f"https://telegram-quiz-bot-pbts.onrender.com/{TOKEN}"
     )
-
