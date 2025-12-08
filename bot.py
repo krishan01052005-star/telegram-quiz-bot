@@ -1,26 +1,26 @@
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, CommandHandler
 from telegram import Update
+from telegram.ext import ContextTypes
 import os
 
-# Load token from environment variable
-TOKEN = os.getenv("TOKEN")
-if not TOKEN:
-    raise ValueError("TOKEN env not found!")
+TOKEN = os.getenv("BOT_TOKEN")  # ENV variable se token lo
 
-# /start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Bot Online! 🚀")
+    await update.message.reply_text("Bot is Running! 🎯")
 
-# App build
-application = ApplicationBuilder().token(TOKEN).build()
+def main():
+    application = ApplicationBuilder().token(TOKEN).build()
 
-application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("start", start))
 
-if __name__ == "__main__":
     PORT = int(os.environ.get("PORT", 8443))
+    
     application.run_webhook(
         listen="0.0.0.0",
         port=PORT,
         url_path=TOKEN,
         webhook_url=f"https://telegram-quiz-bot-pbts.onrender.com/{TOKEN}"
     )
+
+if __name__ == "__main__":
+    main()
